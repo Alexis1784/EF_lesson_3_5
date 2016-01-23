@@ -27,6 +27,12 @@ namespace EF_lesson_3_5
                 t2.Players.Add(pl1);
                 db.Teams.Add(t1);
                 db.Teams.Add(t2);
+
+                // удаляем связи с одним объектом
+                Player pl_edit = db.Players.First(p => p.Name == "Месси");
+                Team t_edit = pl_edit.Teams.First(p => p.Name == "Барселона");
+                t_edit.Players.Remove(pl_edit);
+
                 db.SaveChanges();
                 foreach (Team t in db.Teams.Include(t => t.Players))
                 {
